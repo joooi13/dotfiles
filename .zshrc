@@ -1,12 +1,13 @@
 # 環境変数
 export LANG=ja_JP.UTF-8
 
-#zshのPATHここ？
-export PATH=$PATH:/Users/yujoi/android-sdks/platform-tools
-export PATH=$PATH:/Users/yujoi/android-sdks/tools
-export PATH=$PATH:/Users/yujoi/android-sdks/tools/bin
+#PATH
+export PATH=$PATH:/Users/joooi/Library/Android/sdk/platform-tools
+export PATH=$PATH:/Users/joooi/Library/Android/sdk/tools
+export PATH=$PATH:/Users/joooi/Library/Android/sdk/tools/bin
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
+export PATH="$PATH:/Users/joooi/dev/flutter/bin"
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -37,7 +38,7 @@ setopt correct
 # ビープ音を鳴らさない
 setopt no_beep
 
-# prompt
+# prompt (branchを常に表示)
 autoload -Uz vcs_info
 setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -46,9 +47,6 @@ zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
 zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd() { vcs_info }
-PROMPT='%m:%F{green}%~%f %n %F{yellow}%f🎃   '
-RPROMPT='${vcs_info_msg_0_}'
-SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae] 🤔 ? %{$reset_color%}"
 
 # alias
 alias ls='ls -aF'
@@ -88,24 +86,5 @@ bindkey '^R' peco-history-selection
 #
 setopt nonomatch
 
-
-#test
-PROMPT='%m:%F{green}%~%f %n %F{yellow}%f🎃   '
-RPROMPT='${vcs_info_msg_0_}'
-SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae] 🤔 ? %{$reset_color%}"
-
-case ${HOSTNAME} in 
-    r*)
-        local HOSTCOLOR=$'\e[30;48;5;183m'
-        ;;
-    N*)
-        local HOSTCOLOR=$'\e[36;48;5;081m'
-        ;;
-esac
-
-local COLOR_FG=$'\e[38;5;034m'
-local COLOR_BG=$'\e[30;48;5;082m'
-local COLOR_RESET=$'\e[0m'
-# PROMPT="${COLOR_FG}[%h:%n@${COLOR_RESET}${HOSTCOLOR}%m${COLOR_RESET}${COLOR_FG}:%c]>${COLOR_RESET}"
-#PROMPT="%{${COLOR_FG}%}[%h:%n@%{${COLOR_RESET}%}%{${HOSTCOLOR}%}%m%{${COLOR_RESET}%}%{${COLOR_FG}%}:%c]>%{${COLOR_RESET}%}"
-
+# 初期表示短く
+export PS1="%~ %n $ "
